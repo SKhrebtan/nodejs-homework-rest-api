@@ -9,7 +9,11 @@ const { schemas } = require("../../models/user");
 
 router.post("/register", validates.validateBody(schemas.registerSchema), ctrl.register);
 
-router.post('/login', validates.validateBody(schemas.loginSchema), ctrl.login)
+router.get("/users/verify/:verificationToken", ctrl.verifyEmail);
+
+router.post("/users/verify", validates.validateBody(schemas.emailSchema), ctrl.resendVerification)
+
+router.post('/login', validates.validateBody(schemas.loginSchema), ctrl.login);
 
 router.get('/current', authenticate, ctrl.getCurrent);
 
